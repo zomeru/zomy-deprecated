@@ -10,7 +10,7 @@ const App = () => {
       <GlobalStyles />
       <Switch>
         <Route exact path='/' component={Home} />
-        <Route exact path='/r/:id' component={Redirect} />
+        <Route exact path='/:id' component={Redirect} />
       </Switch>
     </Router>
   );

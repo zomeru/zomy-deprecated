@@ -38,7 +38,7 @@ const Home: React.FC<HomeProps> = ({}) => {
         />
         {isShorten && (
           <div>
-            This is your url: {window.location.host}/r/{tag}
+            This is your url: {window.location.host}/{tag}
           </div>
         )}
         <input type='submit' value='Shorten the url' />
