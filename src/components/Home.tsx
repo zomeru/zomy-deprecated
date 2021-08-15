@@ -6,18 +6,23 @@ interface HomeProps {}
 
 const Home: React.FC<HomeProps> = ({}) => {
   const [url, setUrl] = useState<string>('');
+  const [isShorten, setIsShorten] = useState<boolean>(false);
 
+  let id;
   const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsShorten(true);
     const nanoid = customAlphabet(
       'ABCDEFGHIJKLMNOPQRSTUVabcdefghijklmnopqrstuv1234567890',
       5,
     );
-    const id = nanoid();
+    id = nanoid();
     db.collection('urls').doc(id).set({
       url: url,
     });
-    alert(`This is your url: ${window.location.host}/${id}`);
+    setTimeout(() => {
+      setIsShorten(false);
+    }, 10000);
   };
 
   return (
@@ -29,6 +34,11 @@ const Home: React.FC<HomeProps> = ({}) => {
           onChange={e => setUrl(e.target.value)}
           placeholder='Enter the url here'
         />
+        {isShorten && (
+          <div>
+            This is your url: {window.location.host}/r/${id}
+          </div>
+        )}
         <input type='submit' value='Shorten the url' />
       </form>
     </div>
