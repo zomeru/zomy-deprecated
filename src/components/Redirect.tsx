@@ -21,7 +21,7 @@ const Redirect: React.FC<RedirectProps> = ({}) => {
     console.log(data);
 
     if (!data) {
-      window.location.href = window.location.origin;
+      history.push(window.location.origin);
     } else {
       window.location.replace(data.url as string);
     }

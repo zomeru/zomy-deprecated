@@ -4,22 +4,24 @@ import { customAlphabet } from 'nanoid';
 
 interface HomeProps {}
 
+const nanoid = customAlphabet(
+  'ABCDEFGHIJKLMNOPQRSTUVabcdefghijklmnopqrstuv1234567890',
+  5,
+);
+
 const Home: React.FC<HomeProps> = ({}) => {
   const [url, setUrl] = useState<string>('');
   const [isShorten, setIsShorten] = useState<boolean>(false);
+  const [tag, setTag] = useState<string>('');
 
-  let id;
   const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsShorten(true);
-    const nanoid = customAlphabet(
-      'ABCDEFGHIJKLMNOPQRSTUVabcdefghijklmnopqrstuv1234567890',
-      5,
-    );
-    id = nanoid();
+    const id = nanoid();
+    setTag(id);
     db.collection('urls').doc(id).set({
       url: url,
     });
+    setIsShorten(true);
     setTimeout(() => {
       setIsShorten(false);
     }, 10000);
@@ -36,7 +38,7 @@ const Home: React.FC<HomeProps> = ({}) => {
         />
         {isShorten && (
           <div>
-            This is your url: {window.location.host}/r/${id}
+            This is your url: {window.location.host}/r/{tag}
           </div>
         )}
         <input type='submit' value='Shorten the url' />
