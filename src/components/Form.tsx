@@ -34,7 +34,7 @@ const Form: React.FC<FormProps> = ({}) => {
   };
 
   const validate = (value: string) => {
-    if (!validator.isUrl(value)) {
+    if (!validator.isURL(value)) {
       setErrorURL('Please enter a valid URL');
     }
   };
