@@ -1,4 +1,4 @@
-import React, { useState, FormEvent } from 'react';
+import React, { useState } from 'react';
 import db from '../firebase';
 import { customAlphabet } from 'nanoid';
 import { AiOutlineLink } from 'react-icons/ai';
@@ -25,7 +25,7 @@ const Form: React.FC<FormProps> = ({}) => {
   const [isValidURL, setIsValidURL] = useState<boolean>(false);
   const [isValidAlias, setIsValidAlias] = useState<boolean>(false);
 
-  const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isValidURL && (alias.length === 0 || isValidAlias)) {
       // If no custom alias is set
@@ -100,6 +100,20 @@ const Form: React.FC<FormProps> = ({}) => {
     }
   };
 
+  const handleURLFieldOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.length > 0) {
+      setIsEmptyURL(false);
+    }
+    validateURL(e.target.value);
+    setUrl(e.target.value);
+  };
+
+  const handleAliasFieldOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    validateAlias(e.target.value);
+    setAlias(e.target.value.replaceAll(/ /g, ''));
+    setIsAliasTaken(false);
+  };
+
   return (
     <StyledForm action='' onSubmit={handleFormSubmit}>
       <div className='form-heading one'>
@@ -110,13 +124,7 @@ const Form: React.FC<FormProps> = ({}) => {
         className='textfield'
         type='text'
         value={url}
-        onChange={e => {
-          if (e.target.value.length > 0) {
-            setIsEmptyURL(false);
-          }
-          validateURL(e.target.value);
-          setUrl(e.target.value);
-        }}
+        onChange={handleURLFieldOnChange}
         placeholder='Enter the url here'
       />
       {isEmptyURL && <p className='error-message'>The URL field is required</p>}
@@ -131,11 +139,7 @@ const Form: React.FC<FormProps> = ({}) => {
         className='textfield'
         type='text'
         value={alias}
-        onChange={e => {
-          validateAlias(e.target.value);
-          setAlias(e.target.value.replaceAll(/ /g, ''));
-          setIsAliasTaken(false);
-        }}
+        onChange={handleAliasFieldOnChange}
         placeholder='Custom Alias'
       />
       {!isValidAlias && alias.length > 0 && (
