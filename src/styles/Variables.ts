@@ -17,14 +17,16 @@ const Variables = css`
     --fz-xxl: 22px;
 
     // Colors
-    --white: #fff;
+    --white-pure: #fff;
+    --white: hsl(206, 12%, 95%);
     --black: #000;
     --gray: #7f7f7f;
     --blue: #057dcd;
 
     // Other
-    --max-width: 1500px;
+    --max-width: 1300px;
     --transition: all 0.25s ease-in-out;
+    --rl-space: 50px;
   }
 `;
 
