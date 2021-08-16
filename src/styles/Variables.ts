@@ -19,9 +19,10 @@ const Variables = css`
     // Colors
     --white-pure: #fff;
     --white: hsl(206, 12%, 95%);
-    --black: #000;
+    --black: #191919;
+    --gray-light: #e0e2e3;
     --gray: #7f7f7f;
-    --blue: #057dcd;
+    --blue: #2c87c5;
 
     // Other
     --max-width: 1300px;

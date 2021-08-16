@@ -1,6 +1,4 @@
-import React, { useState, FormEvent } from 'react';
-import db from '../firebase';
-import { customAlphabet } from 'nanoid';
+import React from 'react';
 import { StyledHome } from '../styles/componentStyles/HomeStyles';
 import Form from './Form';
 
