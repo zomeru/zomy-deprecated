@@ -9,8 +9,8 @@ const Nav: React.FC<NavProps> = ({}) => {
   return (
     <StyledNav>
       <nav>
-        <Link to='/'>
-          <a className='logo'>ZOMY</a>
+        <Link to='/' className='logo'>
+          ZOMY
         </Link>
         <div className='nav_links'>
           {navLinks.map(link => {

@@ -16,7 +16,10 @@ const nanoid = customAlphabet(
 const Form: React.FC<FormProps> = ({}) => {
   const [url, setUrl] = useState<string>('');
   const [isEmptyURL, setIsEmptyURL] = useState<boolean>(false);
+
   const [alias, setAlias] = useState<string>('');
+  const [isAliasTaken, setIsAliasTaken] = useState<boolean>(false);
+
   const [isShorten, setIsShorten] = useState<boolean>(false);
   const [tag, setTag] = useState<string>('');
   const [isValidURL, setIsValidURL] = useState<boolean>(false);
@@ -25,14 +28,50 @@ const Form: React.FC<FormProps> = ({}) => {
   const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isValidURL && (alias.length === 0 || isValidAlias)) {
-      const id = nanoid();
-      setTag(id);
-      db.collection('urls')
-        .doc(isValidAlias ? alias : id)
-        .set({
+      // If no custom alias is set
+      if (alias.length <= 0) {
+        // Generated random id
+        let id = nanoid();
+        setTag(id);
+
+        // Check if generated id is already in the database
+        let docRef = db.collection('urls').doc(id);
+        let data = (await docRef.get()).data();
+
+        // If generated id is already in the database, it will generated new id
+        while (data) {
+          id = nanoid();
+          setTag(id);
+          docRef = db.collection('urls').doc(id);
+          data = (await docRef.get()).data();
+        }
+
+        // Set id and url in the database
+        db.collection('urls').doc(id).set({
           url: url,
         });
+
+        // If custom alias is set
+      } else {
+        const docRef = db.collection('urls').doc(alias);
+        const data = (await docRef.get()).data();
+
+        // If custom alias is not taken, set to database
+        if (!data && isValidAlias) {
+          db.collection('urls').doc(alias).set({
+            url: url,
+          });
+
+          // If custom alias is already taken, show an error message
+        } else {
+          setIsAliasTaken(true);
+          return;
+        }
+      }
+
       setIsShorten(true);
+
+      //
       setTimeout(() => {
         setIsShorten(false);
       }, 10000);
@@ -94,7 +133,8 @@ const Form: React.FC<FormProps> = ({}) => {
         value={alias}
         onChange={e => {
           validateAlias(e.target.value);
-          setAlias(e.target.value);
+          setAlias(e.target.value.replaceAll(/ /g, ''));
+          setIsAliasTaken(false);
         }}
         placeholder='Custom Alias'
       />
@@ -103,8 +143,9 @@ const Form: React.FC<FormProps> = ({}) => {
           Alias must be at least 5 alphanumeric characters
         </p>
       )}
+      {isAliasTaken && <p className='error-message'>Alias already taken</p>}
       <button type='submit'>Shorten URL</button>
-      {isShorten && (
+      {isShorten && !isAliasTaken && (
         <div>
           This is your url: {window.location.host}/{isValidAlias ? alias : tag}
         </div>

@@ -1,14 +1,18 @@
 import React from 'react';
-import { StyledHome } from '../styles/componentStyles/HomeStyles';
 import Form from './Form';
+import Nav from './Nav';
+import { StyledHome } from '../styles/componentStyles/HomeStyles';
 
 interface HomeProps {}
 
 const Home: React.FC<HomeProps> = ({}) => {
   return (
-    <StyledHome>
-      <Form />
-    </StyledHome>
+    <>
+      <Nav />
+      <StyledHome>
+        <Form />
+      </StyledHome>
+    </>
   );
 };
 

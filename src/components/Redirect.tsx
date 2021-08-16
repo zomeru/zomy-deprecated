@@ -31,7 +31,7 @@ const Redirect: React.FC<RedirectProps> = ({}) => {
     getFirebaseData();
   }, []);
 
-  return <div></div>;
+  return <div style={{ textAlign: 'center' }}>REDIRECTING...</div>;
 };
 
 export default Redirect;
