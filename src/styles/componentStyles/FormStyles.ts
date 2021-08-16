@@ -10,7 +10,7 @@ export const StyledForm = styled.form`
   border-radius: 5px;
   overflow: none;
 
-  .form_heading {
+  .form-heading {
     display: flex;
     align-items: center;
     font-size: 15px;
@@ -30,7 +30,15 @@ export const StyledForm = styled.form`
     transform: scaleX(-1);
   }
 
+  .error-message {
+    margin-top: 5px;
+    color: var(--red);
+    margin-left: 20px;
+    font-size: 14px;
+  }
+
   .textfield {
+    color: var(--blue);
     font-size: 18px;
     border-radius: 5px;
     padding: 3px 20px;

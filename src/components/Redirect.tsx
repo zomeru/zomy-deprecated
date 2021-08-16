@@ -31,7 +31,7 @@ const Redirect: React.FC<RedirectProps> = ({}) => {
     getFirebaseData();
   }, []);
 
-  return <div>ZOMER</div>;
+  return <div></div>;
 };
 
 export default Redirect;
