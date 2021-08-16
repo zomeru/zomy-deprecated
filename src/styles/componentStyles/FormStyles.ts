@@ -39,26 +39,46 @@ export const StyledForm = styled.form`
 
   .textfield {
     color: var(--blue);
-    font-size: 18px;
-    border-radius: 5px;
     padding: 3px 20px;
-    height: 50px;
-    margin-top: 15px;
-    width: 100%;
     outline: none;
     border: none;
   }
 
   button {
-    border-radius: 5px;
-    margin-top: 15px;
-    font-size: 18px;
     cursor: pointer;
     color: var(--white);
-    width: 100%;
-    height: 50px;
     border: none;
     outline: none;
     background-color: var(--blue);
+  }
+
+  .input {
+    font-size: 18px;
+    font-weight: 400;
+    border-radius: 5px;
+    width: 100%;
+    height: 50px;
+    margin-top: 15px;
+  }
+
+  .long-url {
+    color: var(--blue);
+    background-color: var(--white-pure);
+    padding: 10px 20px;
+    min-height: 50px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    word-break: break-word;
+    word-wrap: break-word;
+  }
+
+  .make-another-url {
+    cursor: pointer;
+    background-color: var(--blue);
+    color: var(--white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `;

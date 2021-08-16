@@ -27,60 +27,57 @@ const Form: React.FC<FormProps> = ({}) => {
 
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (isValidURL && (alias.length === 0 || isValidAlias)) {
-      // If no custom alias is set
-      if (alias.length <= 0) {
-        // Generated random id
-        let id = nanoid();
-        setTag(id);
-
-        // Check if generated id is already in the database
-        let docRef = db.collection('urls').doc(id);
-        let data = (await docRef.get()).data();
-
-        // If generated id is already in the database, it will generated new id
-        while (data) {
-          id = nanoid();
+    if (!isShorten) {
+      if (isValidURL && (alias.length === 0 || isValidAlias)) {
+        // If no custom alias is set
+        if (alias.length <= 0) {
+          // Generated random id
+          let id = nanoid();
           setTag(id);
-          docRef = db.collection('urls').doc(id);
-          data = (await docRef.get()).data();
-        }
 
-        // Set id and url in the database
-        db.collection('urls').doc(id).set({
-          url: url,
-        });
+          // Check if generated id is already in the database
+          let docRef = db.collection('urls').doc(id);
+          let data = (await docRef.get()).data();
 
-        // If custom alias is set
-      } else {
-        const docRef = db.collection('urls').doc(alias);
-        const data = (await docRef.get()).data();
+          // If generated id is already in the database, it will generated new id
+          while (data) {
+            id = nanoid();
+            setTag(id);
+            docRef = db.collection('urls').doc(id);
+            data = (await docRef.get()).data();
+          }
 
-        // If custom alias is not taken, set to database
-        if (!data && isValidAlias) {
-          db.collection('urls').doc(alias).set({
+          // Set id and url in the database
+          db.collection('urls').doc(id).set({
             url: url,
           });
 
-          // If custom alias is already taken, show an error message
+          // If custom alias is set
         } else {
-          setIsAliasTaken(true);
-          return;
+          const docRef = db.collection('urls').doc(alias);
+          const data = (await docRef.get()).data();
+
+          // If custom alias is not taken, set to database
+          if (!data && isValidAlias) {
+            db.collection('urls').doc(alias).set({
+              url: url,
+            });
+
+            // If custom alias is already taken, show an error message
+          } else {
+            setIsAliasTaken(true);
+            return;
+          }
         }
+
+        setIsShorten(true);
       }
 
-      setIsShorten(true);
-
-      //
-      setTimeout(() => {
-        setIsShorten(false);
-      }, 10000);
-    }
-
-    if (url.length <= 0) {
-      setIsEmptyURL(true);
-    } else {
-      setIsEmptyURL(false);
+      if (url.length <= 0) {
+        setIsEmptyURL(true);
+      } else {
+        setIsEmptyURL(false);
+      }
     }
   };
 
@@ -114,44 +111,72 @@ const Form: React.FC<FormProps> = ({}) => {
     setIsAliasTaken(false);
   };
 
+  const makeAnotherURL = () => {
+    setAlias('');
+    setUrl('');
+    setIsEmptyURL(false);
+    setIsAliasTaken(false);
+    setTag('');
+    setIsValidURL(false);
+    setIsValidAlias(false);
+    setIsShorten(false);
+  };
+
   return (
     <StyledForm action='' onSubmit={handleFormSubmit}>
       <div className='form-heading one'>
         <AiOutlineLink className='icons' />
-        <h3>Enter a URL to make it short.</h3>
+        <h3>
+          {!isShorten ? 'Enter a URL to make it short.' : 'Your long URL'}
+        </h3>
       </div>
-      <input
-        className='textfield'
-        type='text'
-        value={url}
-        onChange={handleURLFieldOnChange}
-        placeholder='Enter the url here'
-      />
+      {!isShorten ? (
+        <input
+          className='textfield input'
+          type='text'
+          value={url}
+          onChange={handleURLFieldOnChange}
+          placeholder='Enter the url here'
+        />
+      ) : (
+        <div className='input long-url'>{url}</div>
+      )}
       {isEmptyURL && <p className='error-message'>The URL field is required</p>}
       {!isValidURL && url.length > 0 && (
         <p className='error-message'>Please enter a valid URL</p>
       )}
       <div className='form-heading two'>
         <IoMdColorWand className='icons wand-icon' />
-        <h3>Customize your link (Optional)</h3>
+        <h3>
+          {!isShorten ? 'Customize your link (Optional)' : 'Your ZomyURL'}
+        </h3>
       </div>
-      <input
-        className='textfield'
-        type='text'
-        value={alias}
-        onChange={handleAliasFieldOnChange}
-        placeholder='Custom Alias'
-      />
+      {!isShorten ? (
+        <input
+          className='textfield input'
+          type='text'
+          value={alias}
+          onChange={handleAliasFieldOnChange}
+          placeholder='Custom Alias'
+        />
+      ) : (
+        <div className='input long-url'>{`${window.location.host}/${
+          isValidAlias ? alias : tag
+        }`}</div>
+      )}
       {!isValidAlias && alias.length > 0 && (
         <p className='error-message'>
           Alias must be at least 5 alphanumeric characters
         </p>
       )}
       {isAliasTaken && <p className='error-message'>Alias already taken</p>}
-      <button type='submit'>Shorten URL</button>
-      {isShorten && !isAliasTaken && (
-        <div>
-          This is your url: {window.location.host}/{isValidAlias ? alias : tag}
+      {!isShorten ? (
+        <button type='submit' className='input'>
+          Shorten URL
+        </button>
+      ) : (
+        <div className='make-another-url input' onClick={makeAnotherURL}>
+          Make another Zomy URL
         </div>
       )}
     </StyledForm>
