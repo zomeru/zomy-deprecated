@@ -1,4 +1,0 @@
-{
-  "rewrites": [{ "source": "/:id", "destination": "/r/:id" }],
-  "redirects": [{ "source": "/:id", "destination": "/r/:id" }]
-}
