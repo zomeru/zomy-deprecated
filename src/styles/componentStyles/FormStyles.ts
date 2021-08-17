@@ -77,6 +77,16 @@ export const StyledForm = styled.form`
     font-weight: 600;
   }
 
+  .copy {
+    background-color: var(--blue);
+    color: var(--white);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+
   .make-another-url {
     cursor: pointer;
     background-color: var(--blue);

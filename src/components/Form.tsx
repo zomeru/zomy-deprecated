@@ -27,6 +27,8 @@ const Form: React.FC<FormProps> = ({}) => {
   const [isValidURL, setIsValidURL] = useState<boolean>(false);
   const [isValidAlias, setIsValidAlias] = useState<boolean>(false);
 
+  const [isCopied, setIsCopied] = useState<boolean>(false);
+
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -115,6 +117,13 @@ const Form: React.FC<FormProps> = ({}) => {
     setIsAliasTaken(false);
   };
 
+  const copyToClipboard = () => {
+    setIsCopied(true);
+    navigator.clipboard.writeText(
+      `${window.location.host}/${isValidAlias ? alias : tag}`,
+    );
+  };
+
   const makeAnotherURL = () => {
     setAlias('');
     setUrl('');
@@ -124,6 +133,7 @@ const Form: React.FC<FormProps> = ({}) => {
     setIsValidURL(false);
     setIsValidAlias(false);
     setButtonClicked(false);
+    setIsCopied(false);
     setIsShorten(false);
   };
 
@@ -153,7 +163,7 @@ const Form: React.FC<FormProps> = ({}) => {
       <div className='form-heading two'>
         <IoMdColorWand className='icons wand-icon' />
         <h3>
-          {!isShorten ? 'Customize your link (Optional)' : 'Your ZomyURL'}
+          {!isShorten ? 'Customize your link (Optional)' : 'Your Zomy URL'}
         </h3>
       </div>
       {!isShorten ? (
@@ -189,9 +199,14 @@ const Form: React.FC<FormProps> = ({}) => {
           )}
         </button>
       ) : (
-        <div className='make-another-url input' onClick={makeAnotherURL}>
-          Make another Zomy URL
-        </div>
+        <>
+          <div className='input copy' onClick={copyToClipboard}>
+            {!isCopied ? 'Copy' : 'Copied to Clipboard!'}
+          </div>
+          <div className='make-another-url input' onClick={makeAnotherURL}>
+            Make another Zomy URL
+          </div>
+        </>
       )}
     </StyledForm>
   );
