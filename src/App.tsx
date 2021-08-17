@@ -39,6 +39,8 @@ const App = () => {
       <GlobalStyles />
       <Switch>
         <Route exact path='/' component={Home} />
+        <Route path='/robots.txt' />
+        <Route path='/sitemap.xml' />
         <Route exact path='/:id' component={Redirect} />
       </Switch>
     </Router>
