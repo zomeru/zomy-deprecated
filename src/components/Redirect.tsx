@@ -21,7 +21,11 @@ const Redirect: React.FC<RedirectProps> = ({}) => {
       alert('Invalid URL');
       history.push('/');
     } else {
-      window.location.replace(data.url as string);
+      if (data.url.indexOf('http') > -1) {
+        window.location.replace(data.url as string);
+      } else {
+        window.location.replace(`http://${data.url}`);
+      }
     }
   };
 
