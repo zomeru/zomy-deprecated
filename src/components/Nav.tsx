@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { navLinks } from '../config';
+import logo from '../assets/logo.png';
 import { StyledNav } from '../styles/componentStyles/NavStyles';
 
 interface NavProps {}
@@ -10,7 +11,8 @@ const Nav: React.FC<NavProps> = ({}) => {
     <StyledNav>
       <nav>
         <Link to='/' className='logo'>
-          ZOMY
+          <img src={logo} alt='logo' className='logo-image' />
+          <span>ZOMY</span>
         </Link>
         <div className='nav_links'>
           {navLinks.map(link => {

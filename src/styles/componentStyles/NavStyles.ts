@@ -19,9 +19,17 @@ export const StyledNav = styled.header`
     }
   }
 
+  .logo-image {
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+  }
+
   .logo {
     text-transform: uppercase;
     font-weight: 600;
     font-size: 30px;
+    display: flex;
+    align-items: center;
   }
 `;
