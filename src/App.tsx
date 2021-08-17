@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  useHistory,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import Home from './components/Home';
 import Redirect from './components/Redirect';
@@ -17,7 +12,6 @@ const App = () => {
       <Helmet>
         <meta charSet='UTF-8' />
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
-
         <meta name='description' content={seo.description} />
         <meta property='og:title' content={seo.title} />
         <meta property='og:description' content={seo.description} />
@@ -44,7 +38,6 @@ const App = () => {
       <GlobalStyles />
       <Switch>
         <Route exact path='/' component={Home} />
-
         <Route exact path='/:id' component={Redirect} />
       </Switch>
     </Router>
