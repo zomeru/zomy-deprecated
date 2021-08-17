@@ -17,14 +17,12 @@ const Redirect: React.FC<RedirectProps> = ({}) => {
     const docRef = db.collection('urls').doc(id);
     const data = await (await docRef.get()).data();
 
-    setTimeout(() => {
-      if (!data) {
-        alert('Invalid URL');
-        history.push('/');
-      } else {
-        window.location.replace(data.url as string);
-      }
-    }, 1000);
+    if (!data) {
+      alert('Invalid URL');
+      history.push('/');
+    } else {
+      window.location.replace(data.url as string);
+    }
   };
 
   useEffect(() => {
