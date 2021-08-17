@@ -11,8 +11,7 @@ export const navLinks: INavLinks[] = [
 export const seo = {
   description: 'Zomy is a free link shortener',
   title: 'Zomy | URL Shortener',
-  image:
-    '"https://raw.githubusercontent.com/zomeru/zomy/main/src/assets/OG.png',
-  logo: '"https://raw.githubusercontent.com/zomeru/zomy/main/src/assets/logo.png',
+  image: 'https://raw.githubusercontent.com/zomeru/zomy/main/src/assets/OG.png',
+  logo: 'https://raw.githubusercontent.com/zomeru/zomy/main/src/assets/logo.png',
   url: 'https://zomy.ml',
 };
