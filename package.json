@@ -9,7 +9,6 @@
   },
   "dependencies": {
     "@types/nanoid": "^3.0.0",
-    "@types/react-helmet": "^6.1.2",
     "@types/react-router-dom": "^5.1.8",
     "@types/styled-components": "^5.1.12",
     "firebase": "^8.9.1",
@@ -17,7 +16,6 @@
     "nanoid": "^3.1.25",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
-    "react-helmet": "^6.1.0",
     "react-icons": "^4.2.0",
     "react-router-dom": "^5.2.0",
     "styled-components": "^5.3.0",
