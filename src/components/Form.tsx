@@ -90,7 +90,11 @@ const Form: React.FC<FormProps> = ({}) => {
   };
 
   const validateURL = (value: string) => {
-    if (validator.isURL(value) && value.length > 0) {
+    if (
+      validator.isURL(value) &&
+      value.length > 0 &&
+      !(value.indexOf(`zomy.ml`) > -1)
+    ) {
       setIsValidURL(true);
     } else {
       setIsValidURL(false);
