@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: 
+Sitemap: https://zomy.ml/sitemap.xml
