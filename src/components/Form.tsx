@@ -93,7 +93,7 @@ const Form: React.FC<FormProps> = ({}) => {
     if (
       validator.isURL(value) &&
       value.length > 0 &&
-      !(value.indexOf(`zomy.ml`) > -1)
+      !(value.toLowerCase().indexOf(`zomy.ml`) > -1)
     ) {
       setIsValidURL(true);
     } else {
