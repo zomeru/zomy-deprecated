@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import db from '../firebase';
 import { StyledRedirect } from '../styles/componentStyles/RedirectStyles';

@@ -1,5 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useHistory,
+} from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import Home from './components/Home';
 import Redirect from './components/Redirect';
@@ -39,8 +44,7 @@ const App = () => {
       <GlobalStyles />
       <Switch>
         <Route exact path='/' component={Home} />
-        <Route path='/robots.txt' />
-        <Route path='/sitemap.xml' />
+
         <Route exact path='/:id' component={Redirect} />
       </Switch>
     </Router>
