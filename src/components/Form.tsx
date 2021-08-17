@@ -74,12 +74,14 @@ const Form: React.FC<FormProps> = ({}) => {
         }
       }
 
+      // Display a quick button animation
       setButtonClicked(true);
       setTimeout(() => {
         setIsShorten(true);
       }, 1500);
     }
 
+    // check if url is empty
     if (url.length <= 0) {
       setIsEmptyURL(true);
     } else {
