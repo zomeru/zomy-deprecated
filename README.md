@@ -3,6 +3,4 @@
 </div> -->
 <h1 align="center"><a href='https://zomy.ml/'>zomy.ml</a></h1>
 <p align="center">Zomy is a free link shortener.</p>
-<br>
-<h3 align="center">ZOMY</h3>
 <img align="center" src="https://raw.githubusercontent.com/zomeru/zomy/main/src/assets/OG.png" alt="Zomy - Free link shortener" />
