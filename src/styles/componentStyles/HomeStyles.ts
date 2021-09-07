@@ -2,7 +2,11 @@ import styled from 'styled-components';
 
 export const StyledHome = styled.section`
   padding: 0 var(--rl-space);
-  height: calc(100vh - (150px));
+  /* height: calc(100vh - (150px)); */
+  height: ${(props: any) =>
+    props.isInputFocus
+      ? `calc(${props.height}px - 150px)`
+      : 'calc(100vh - (150px))'};
   display: flex;
   margin: 0 auto;
   max-width: 700px;

@@ -6,14 +6,16 @@ import { IoMdColorWand } from 'react-icons/io';
 import validator from 'validator';
 import { StyledForm } from '../styles/componentStyles/FormStyles';
 
-interface FormProps {}
+interface FormProps {
+  setIsInputFocus: (isInputFocus: boolean) => void;
+}
 
 const nanoid = customAlphabet(
   'ABCDEFGHIJKLMNOPQRSTUVabcdefghijklmnopqrstuv1234567890',
   5,
 );
 
-const Form: React.FC<FormProps> = ({}) => {
+const Form: React.FC<FormProps> = ({ setIsInputFocus }) => {
   const [url, setUrl] = useState<string>('');
   const [isEmptyURL, setIsEmptyURL] = useState<boolean>(false);
 
@@ -28,6 +30,8 @@ const Form: React.FC<FormProps> = ({}) => {
   const [isValidAlias, setIsValidAlias] = useState<boolean>(false);
 
   const [isCopied, setIsCopied] = useState<boolean>(false);
+
+  // const [isInputFocus, setIsInputFocus] = useState<boolean>(false);
 
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -158,6 +162,12 @@ const Form: React.FC<FormProps> = ({}) => {
           value={url}
           onChange={handleURLFieldOnChange}
           placeholder='Enter the url here'
+          onFocus={() => {
+            setIsInputFocus(true);
+          }}
+          onBlur={() => {
+            setIsInputFocus(false);
+          }}
         />
       ) : (
         <div className='input url-shortened'>{url}</div>
@@ -179,6 +189,12 @@ const Form: React.FC<FormProps> = ({}) => {
           value={alias}
           onChange={handleAliasFieldOnChange}
           placeholder='Custom Alias'
+          onFocus={() => {
+            setIsInputFocus(true);
+          }}
+          onBlur={() => {
+            setIsInputFocus(false);
+          }}
         />
       ) : (
         <div className='input url-shortened'>{`${window.location.host}/${
