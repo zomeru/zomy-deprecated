@@ -106,7 +106,7 @@ const Form: React.FC<FormProps> = ({ setIsInputFocus }) => {
   };
 
   const validateAlias = (value: string) => {
-    if (validator.isAlphanumeric(value) && value.length >= 5) {
+    if (validator.isAlphanumeric(value) && value.length >= 3) {
       setIsValidAlias(true);
     } else {
       setIsValidAlias(false);
@@ -203,7 +203,7 @@ const Form: React.FC<FormProps> = ({ setIsInputFocus }) => {
       )}
       {!isValidAlias && alias.length > 0 && (
         <p className='error-message'>
-          Alias must be at least 5 alphanumeric characters
+          Alias must be at least 3 alphanumeric characters
         </p>
       )}
       {isAliasTaken && <p className='error-message'>Alias already taken</p>}
