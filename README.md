@@ -1,3 +1,5 @@
+## DEPRECATED
+
 <!-- <div align="center">
   <img src="https://raw.githubusercontent.com/zomeru/portfolio/main/src/assets/images/web.png" alt="Logo" width="150px" height="50px"/>
 </div> -->
