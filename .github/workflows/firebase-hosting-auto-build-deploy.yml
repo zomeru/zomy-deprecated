@@ -5,28 +5,28 @@ on:
     branches:
       - main
 
-jobs:
-  build_and_preview:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '12'
-      - run: npm install
-      - run: VITE_API_KEY=${{ secrets.VITE_API_KEY }} VITE_AUTH_DOMAIN=${{ secrets.VITE_AUTH_DOMAIN }} VITE_PROJECT_ID=${{ secrets.VITE_PROJECT_ID }} VITE_STORAGE_BUCKET=${{ secrets.VITE_STORAGE_BUCKET }} VITE_MESSAGING_SENDER_ID=${{ secrets.VITE_MESSAGING_SENDER_ID }} VITE_APP_ID=${{ secrets.VITE_APP_ID }} VITE_MEASUREMENT_ID=${{ secrets.VITE_MEASUREMENT_ID }} npm run build
-        env:
-          VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
-          VITE_AUTH_DOMAIN: ${{ secrets.VITE_AUTH_DOMAIN }}
-          VITE_PROJECT_ID: ${{ secrets.VITE_PROJECT_ID }}
-          VITE_STORAGE_BUCKET: ${{ secrets.VITE_STORAGE_BUCKET }}
-          VITE_MESSAGING_SENDER_ID: ${{ secrets.VITE_MESSAGING_SENDER_ID }}
-          VITE_APP_ID: ${{ secrets.VITE_APP_ID }}
-          VITE_MEASUREMENT_ID: ${{ secrets.VITE_MEASUREMENT_ID }}
-      - uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_ZOMY_47A3D }}'
-          expires: 30d
-          projectId: zomy-47a3d
-          channelId: live
+# jobs:
+#   build_and_preview:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
+#       - uses: actions/setup-node@v1
+#         with:
+#           node-version: '12'
+#       - run: npm install
+#       - run: VITE_API_KEY=${{ secrets.VITE_API_KEY }} VITE_AUTH_DOMAIN=${{ secrets.VITE_AUTH_DOMAIN }} VITE_PROJECT_ID=${{ secrets.VITE_PROJECT_ID }} VITE_STORAGE_BUCKET=${{ secrets.VITE_STORAGE_BUCKET }} VITE_MESSAGING_SENDER_ID=${{ secrets.VITE_MESSAGING_SENDER_ID }} VITE_APP_ID=${{ secrets.VITE_APP_ID }} VITE_MEASUREMENT_ID=${{ secrets.VITE_MEASUREMENT_ID }} npm run build
+#         env:
+#           VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
+#           VITE_AUTH_DOMAIN: ${{ secrets.VITE_AUTH_DOMAIN }}
+#           VITE_PROJECT_ID: ${{ secrets.VITE_PROJECT_ID }}
+#           VITE_STORAGE_BUCKET: ${{ secrets.VITE_STORAGE_BUCKET }}
+#           VITE_MESSAGING_SENDER_ID: ${{ secrets.VITE_MESSAGING_SENDER_ID }}
+#           VITE_APP_ID: ${{ secrets.VITE_APP_ID }}
+#           VITE_MEASUREMENT_ID: ${{ secrets.VITE_MEASUREMENT_ID }}
+#       - uses: FirebaseExtended/action-hosting-deploy@v0
+#         with:
+#           repoToken: '${{ secrets.GITHUB_TOKEN }}'
+#           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_ZOMY_47A3D }}'
+#           expires: 30d
+#           projectId: zomy-47a3d
+#           channelId: live
